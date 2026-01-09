@@ -49,6 +49,9 @@ class _RestaurantsViewState extends State<RestaurantsView> {
                 itemCount: widget.restaurants.length,
                 itemBuilder: (context,index){
                   Restaurant selected=widget.restaurants[index];
+                  if(isChecked&&selected.type!=RestaurantType.khmer){
+                    return SizedBox.shrink();
+                  }
                   return GestureDetector(
                     onTap: () async{
                       await Navigator.push(
@@ -86,7 +89,7 @@ class RestaurantListTile extends StatelessWidget {
         padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Colors.grey[300],
+          color: Colors.grey[400],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,11 +97,11 @@ class RestaurantListTile extends StatelessWidget {
           children: [
             Text(restaurant.name,
              style: TextStyle(
-              fontSize: 24
+              fontSize: 20
              ),
             ),
             Row(
-              spacing: 12,
+              spacing: 10,
               children: [
                 StarsChip(r:restaurant),
                 RestaurantTypeChip(type: restaurant.type)
